@@ -1,2 +1,10 @@
-const AddVehicle = () => <div className="p-4">Add Vehicle Page</div>;
+const AddVehicle = () => {
+    return (
+        <div>
+            <h1 className="text-2xl font-semibold mb-3">Add a New Vehicle</h1>
+            <p>Form will go here...</p>
+        </div>
+    );
+};
+
 export default AddVehicle;

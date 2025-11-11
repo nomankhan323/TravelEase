@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 const UpdateVehicle = () => {
     const { id } = useParams();
@@ -8,20 +9,21 @@ const UpdateVehicle = () => {
 
     useEffect(() => {
         fetch(`http://localhost:5000/vehicle/${id}`)
-            .then(res => res.json())
-            .then(data => setVehicle(data));
+            .then((res) => res.json())
+            .then((data) => setVehicle(data))
+            .catch((err) => console.error(err));
     }, [id]);
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         setVehicle({ ...vehicle, [e.target.name]: e.target.value });
     };
 
-    const handleUpdate = async e => {
+    const handleUpdate = async (e) => {
         e.preventDefault();
         const res = await fetch(`http://localhost:5000/update-vehicle/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(vehicle)
+            body: JSON.stringify(vehicle),
         });
 
         const data = await res.json();
@@ -29,71 +31,89 @@ const UpdateVehicle = () => {
         else toast.error("Update failed");
     };
 
-    if (!vehicle) return <p>Loading...</p>;
+    if (!vehicle)
+        return (
+            <p className="text-center text-gray-500 mt-10 text-lg">Loading...</p>
+        );
 
     return (
-        <div className="max-w-3xl mx-auto p-4">
-            <h1 className="text-2xl font-semibold mb-4">Update Vehicle</h1>
+        <motion.div
+            className="max-w-3xl mx-auto p-6 bg-white rounded shadow mt-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+        >
+            <h1 className="text-3xl font-bold mb-6 text-gray-800 text-center">
+                Update Vehicle
+            </h1>
 
             <form onSubmit={handleUpdate} className="grid grid-cols-1 gap-4">
                 <input
                     name="vehicleName"
                     value={vehicle.vehicleName}
                     onChange={handleChange}
-                    className="border p-2 rounded"
+                    placeholder="Vehicle Name"
+                    className="border p-3 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
                 />
                 <input
                     name="owner"
                     value={vehicle.owner}
                     onChange={handleChange}
-                    className="border p-2 rounded"
+                    placeholder="Owner Name"
+                    className="border p-3 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
                 />
                 <input
                     name="category"
                     value={vehicle.category}
                     onChange={handleChange}
-                    className="border p-2 rounded"
+                    placeholder="Category"
+                    className="border p-3 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
                 />
                 <input
                     name="pricePerDay"
                     value={vehicle.pricePerDay}
                     onChange={handleChange}
-                    className="border p-2 rounded"
+                    placeholder="Price per Day"
+                    className="border p-3 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
                 />
                 <input
                     name="location"
                     value={vehicle.location}
                     onChange={handleChange}
-                    className="border p-2 rounded"
+                    placeholder="Location"
+                    className="border p-3 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
                 />
                 <input
                     name="availability"
                     value={vehicle.availability}
                     onChange={handleChange}
-                    className="border p-2 rounded"
+                    placeholder="Availability"
+                    className="border p-3 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
                 />
                 <textarea
                     name="description"
                     value={vehicle.description}
                     onChange={handleChange}
-                    className="border p-2 rounded"
+                    placeholder="Description"
                     rows="4"
-                ></textarea>
+                    className="border p-3 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
+                />
                 <input
                     name="coverImage"
                     value={vehicle.coverImage}
                     onChange={handleChange}
-                    className="border p-2 rounded"
+                    placeholder="Cover Image URL"
+                    className="border p-3 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
                 />
 
                 <button
                     type="submit"
-                    className="bg-green-600 text-white p-2 rounded"
+                    className="bg-green-600 hover:bg-green-700 transition-colors text-white py-3 rounded font-semibold mt-2"
                 >
                     Update Vehicle
                 </button>
             </form>
-        </div>
+        </motion.div>
     );
 };
 

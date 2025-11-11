@@ -20,13 +20,11 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // ✅ Google login
     const googleLogin = () => signInWithPopup(auth, provider);
 
-    // ✅ Email-password signup (added now)
     const signUp = async (email, password, name, photoURL) => {
         const res = await createUserWithEmailAndPassword(auth, email, password);
-        // Update user profile
+
         await updateProfile(res.user, {
             displayName: name,
             photoURL: photoURL || "",
@@ -34,10 +32,8 @@ export const AuthProvider = ({ children }) => {
         setUser({ ...res.user, displayName: name, photoURL });
     };
 
-    // ✅ Logout
     const logout = () => signOut(auth);
 
-    // ✅ Track user state
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);

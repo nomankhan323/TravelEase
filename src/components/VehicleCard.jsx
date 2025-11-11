@@ -4,15 +4,16 @@ const VehicleCard = ({ vehicle }) => {
     return (
         <div className="border p-3 rounded shadow">
             <img
-                src={vehicle.image}
-                alt={vehicle.name}
+                src={vehicle.coverImage}
+                alt={vehicle.vehicleName}
                 className="w-full h-40 object-cover rounded mb-2"
             />
 
-            <h2 className="text-xl font-semibold">{vehicle.name}</h2>
-            <p>Type: {vehicle.type}</p>
-            <p>Capacity: {vehicle.capacity}</p>
-            <p>Price: ${vehicle.price}</p>
+            <h2 className="text-xl font-semibold">{vehicle.vehicleName}</h2>
+            <p>Owner: {vehicle.owner}</p>
+            <p>Category: {vehicle.category}</p>
+            <p>Price: {vehicle.pricePerDay}৳ / day</p>
+            <p>Location: {vehicle.location}</p>
 
             <Link
                 to={`/vehicle/${vehicle._id}`}

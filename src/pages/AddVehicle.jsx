@@ -1,65 +1,156 @@
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddVehicle = () => {
-    const [formData, setFormData] = useState({
-        name: "",
-        image: "",
-        type: "",
-        capacity: "",
-        price: "",
+    const { user } = useAuth();
+    const navigate = useNavigate();
+
+    // Form state
+    const [vehicleData, setVehicleData] = useState({
+        vehicleName: "",
+        owner: "",
+        category: "",
+        pricePerDay: "",
+        location: "",
+        availability: "Available",
+        description: "",
+        coverImage: "",
+        userEmail: user?.email || ""
     });
 
+    // Handle change
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
+        setVehicleData({
+            ...vehicleData,
+            [e.target.name]: e.target.value
         });
     };
 
+    // Submit form
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const res = await fetch("http://localhost:5000/add-vehicle", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-        });
+        if (!user) {
+            toast.error("Please login first!");
+            return;
+        }
 
-        const data = await res.json();
+        const finalData = { ...vehicleData, userEmail: user.email };
 
-        if (data.success) {
-            toast.success("Vehicle added successfully!");
-            setFormData({ name: "", image: "", type: "", capacity: "", price: "" });
-        } else {
-            toast.error("Failed to add vehicle");
+        try {
+            const res = await fetch("http://localhost:5000/add-vehicle", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(finalData),
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                toast.success("Vehicle Added Successfully!");
+                navigate("/myVehicles");
+            } else {
+                toast.error("Failed to add vehicle");
+            }
+        } catch (err) {
+            toast.error("Something went wrong!");
+            console.error(err);
         }
     };
 
     return (
-        <div>
-            <h1 className="text-2xl font-semibold mb-5">Add a New Vehicle</h1>
+        <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow">
+            <h2 className="text-2xl font-bold mb-5">Add New Vehicle</h2>
 
-            <form onSubmit={handleSubmit} className="space-y-4 w-1/2">
-                <input name="name" value={formData.name} onChange={handleChange}
-                    placeholder="Vehicle Name" className="border p-2 w-full" required />
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
 
-                <input name="image" value={formData.image} onChange={handleChange}
-                    placeholder="Image URL" className="border p-2 w-full" required />
+                <input
+                    type="text"
+                    name="vehicleName"
+                    placeholder="Vehicle Name"
+                    className="border p-2 rounded"
+                    onChange={handleChange}
+                    required
+                />
 
-                <input name="type" value={formData.type} onChange={handleChange}
-                    placeholder="Type (Car, Bike, Bus)" className="border p-2 w-full" required />
+                <input
+                    type="text"
+                    name="owner"
+                    placeholder="Owner Name"
+                    className="border p-2 rounded"
+                    onChange={handleChange}
+                    required
+                />
 
-                <input name="capacity" value={formData.capacity} onChange={handleChange}
-                    placeholder="Capacity" className="border p-2 w-full" required />
+                <select
+                    name="category"
+                    className="border p-2 rounded"
+                    onChange={handleChange}
+                    required
+                >
+                    <option value="">Select Category</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Electric">Electric</option>
+                    <option value="Van">Van</option>
+                </select>
 
-                <input name="price" value={formData.price} onChange={handleChange}
-                    placeholder="Price per day" className="border p-2 w-full" required />
+                <input
+                    type="number"
+                    name="pricePerDay"
+                    placeholder="Price Per Day"
+                    className="border p-2 rounded"
+                    onChange={handleChange}
+                    required
+                />
 
-                <button type="submit"
-                    className="bg-blue-600 text-white px-4 py-2 rounded">
+                <input
+                    type="text"
+                    name="location"
+                    placeholder="Location"
+                    className="border p-2 rounded"
+                    onChange={handleChange}
+                    required
+                />
+
+                <select
+                    name="availability"
+                    className="border p-2 rounded"
+                    onChange={handleChange}
+                >
+                    <option value="Available">Available</option>
+                    <option value="Booked">Booked</option>
+                </select>
+
+                <textarea
+                    name="description"
+                    placeholder="Description"
+                    className="border p-2 rounded"
+                    rows="4"
+                    onChange={handleChange}
+                    required
+                ></textarea>
+
+                <input
+                    type="text"
+                    name="coverImage"
+                    placeholder="Vehicle Image URL"
+                    className="border p-2 rounded"
+                    onChange={handleChange}
+                    required
+                />
+
+                <button
+                    type="submit"
+                    className="bg-blue-600 text-white py-2 rounded"
+                >
                     Add Vehicle
                 </button>
+
             </form>
         </div>
     );

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 const VehicleDetails = () => {
     const { id } = useParams();
@@ -10,8 +11,9 @@ const VehicleDetails = () => {
 
     useEffect(() => {
         fetch(`http://localhost:5000/vehicle/${id}`)
-            .then(res => res.json())
-            .then(data => setVehicle(data));
+            .then((res) => res.json())
+            .then((data) => setVehicle(data))
+            .catch((err) => console.error(err));
     }, [id]);
 
     const handleBooking = async () => {
@@ -27,41 +29,59 @@ const VehicleDetails = () => {
             image: vehicle.coverImage,
         };
 
-        const res = await fetch("http://localhost:5000/book", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(booking)
-        });
+        try {
+            const res = await fetch("http://localhost:5000/book", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(booking),
+            });
 
-        const data = await res.json();
+            const data = await res.json();
 
-        if (data.success) toast.success("Booking Successful!");
-        else toast.error("Booking Failed");
+            if (data.success) toast.success("Booking Successful!");
+            else toast.error("Booking Failed");
+        } catch (err) {
+            toast.error("Something went wrong!");
+            console.error(err);
+        }
     };
 
-    if (!vehicle) return <p>Loading...</p>;
+    if (!vehicle)
+        return (
+            <p className="text-center text-gray-500 mt-10 text-lg">Loading...</p>
+        );
 
     return (
-        <div className="max-w-3xl mx-auto p-4">
-            <img
+        <motion.div
+            className="max-w-3xl mx-auto p-6 bg-white rounded shadow mt-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+        >
+            <motion.img
                 src={vehicle.coverImage}
                 alt={vehicle.vehicleName}
                 className="w-full h-80 object-cover rounded"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
             />
-            <h1 className="text-3xl font-bold mt-4">{vehicle.vehicleName}</h1>
-            <p>Owner: {vehicle.owner}</p>
-            <p>Category: {vehicle.category}</p>
-            <p>Price Per Day: {vehicle.pricePerDay}৳</p>
-            <p>Location: {vehicle.location}</p>
-            <p className="mt-2">{vehicle.description}</p>
+
+            <h1 className="text-3xl font-bold mt-4 text-gray-800">
+                {vehicle.vehicleName}
+            </h1>
+            <p className="text-gray-600 mt-1">Owner: {vehicle.owner}</p>
+            <p className="text-gray-600">Category: {vehicle.category}</p>
+            <p className="text-gray-600">Price Per Day: {vehicle.pricePerDay}৳</p>
+            <p className="text-gray-600">Location: {vehicle.location}</p>
+            <p className="text-gray-700 mt-3">{vehicle.description}</p>
 
             <button
                 onClick={handleBooking}
-                className="bg-green-600 text-white px-5 py-2 mt-5 rounded"
+                className="bg-blue-600 hover:bg-blue-700 transition-colors text-white px-6 py-2 mt-5 rounded font-semibold"
             >
                 Book Now
             </button>
-        </div>
+        </motion.div>
     );
 };
 

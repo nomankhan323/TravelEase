@@ -13,9 +13,7 @@ const Register = () => {
     const { signUp } = useAuth();
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
+    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -23,24 +21,22 @@ const Register = () => {
 
         // Password validation
         if (!/(?=.*[A-Z])(?=.*[a-z]).{6,}/.test(password)) {
-            toast.error("Password must include upper, lower & 6+ chars");
+            toast.error("❌ Password must include upper, lower & 6+ chars");
             return;
         }
 
         try {
             await signUp(email, password, name, photoURL);
-            toast.success("Registration successful!");
+            toast.success("✅ Registration successful!");
             navigate("/");
         } catch (err) {
-            toast.error(err.message);
+            toast.error("❌ " + err.message);
         }
     };
 
     return (
-        <div className="max-w-md mx-auto mt-10 p-6 border rounded shadow">
-            <h2 className="text-2xl font-bold mb-4 text-center text-blue-600">
-                Register
-            </h2>
+        <div className="max-w-md mx-auto mt-10 p-6 border rounded shadow bg-sky-50">
+            <h2 className="text-2xl font-bold mb-4 text-center text-blue-600">Register</h2>
             <form onSubmit={handleRegister} className="space-y-3">
                 <input
                     type="text"
@@ -73,7 +69,10 @@ const Register = () => {
                     className="w-full border p-2 rounded"
                     required
                 />
-                <button className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+                <button
+                    type="submit"
+                    className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+                >
                     Register
                 </button>
             </form>

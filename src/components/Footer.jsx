@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const Footer = () => {
     return (
         <motion.footer
-            className="bg-blue-600 text-white mt-12"
+            className="bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500 text-white mt-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}

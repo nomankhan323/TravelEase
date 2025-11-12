@@ -27,10 +27,11 @@ const VehicleCard = ({ vehicle }) => {
 
                 <Link
                     to={`/vehicle/${vehicle._id}`}
-                    className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                    className="inline-block px-5 py-2.5 bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600 text-white font-semibold rounded-lg shadow-md hover:from-sky-600 hover:via-indigo-600 hover:to-purple-700 transition-all duration-300"
                 >
                     View Details
                 </Link>
+
             </div>
         </motion.div>
     );

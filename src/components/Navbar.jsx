@@ -51,7 +51,7 @@ const Navbar = () => {
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled
                     ? "backdrop-blur-md bg-blue-900/70 shadow-md"
-                    : "bg-blue-600"
+                    : "bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500"
                     } text-white`}
             >
                 <div className="flex justify-between items-center h-14 px-3 md:px-4">
@@ -108,7 +108,7 @@ const Navbar = () => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={handleLogin}
-                                className="bg-green-500 hover:bg-green-600 px-3 py-1 rounded-md text-sm font-medium transition hidden md:block"
+                                className="bg-gradient-to-r from-yellow-400 to-orange-500 px-3 py-1 rounded-md text-sm font-medium transition hidden md:block"
                             >
                                 Login with Google
                             </motion.button>

@@ -57,10 +57,6 @@ const PromoSection = () => {
                             />
                         </AnimatePresence>
                     </div>
-
-                    <div className="absolute -top-6 -right-6 bg-white text-sky-600 px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                        30+ Screens
-                    </div>
                 </div>
             </div>
         </section>

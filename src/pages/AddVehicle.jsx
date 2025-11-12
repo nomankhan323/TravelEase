@@ -153,12 +153,16 @@ const AddVehicle = () => {
 
                 <motion.button
                     type="submit"
-                    className="bg-blue-600 text-white py-3 rounded font-semibold hover:bg-blue-700 transition-colors"
+                    className="bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600
+               text-white py-3 px-6 rounded font-semibold 
+               shadow-md hover:from-sky-600 hover:via-indigo-600 hover:to-purple-700 
+               transition-all duration-300"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                 >
                     Add Vehicle
                 </motion.button>
+
             </form>
         </motion.div>
     );

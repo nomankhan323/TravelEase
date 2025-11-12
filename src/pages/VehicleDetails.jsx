@@ -77,10 +77,14 @@ const VehicleDetails = () => {
 
             <button
                 onClick={handleBooking}
-                className="bg-blue-600 hover:bg-blue-700 transition-colors text-white px-6 py-2 mt-5 rounded font-semibold"
+                className="bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600 
+               hover:from-sky-600 hover:via-indigo-600 hover:to-purple-700 
+               text-white px-6 py-2 mt-5 rounded font-semibold 
+               shadow-md transition-all duration-300"
             >
                 Book Now
             </button>
+
         </motion.div>
     );
 };

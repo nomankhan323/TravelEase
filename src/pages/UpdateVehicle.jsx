@@ -105,13 +105,13 @@ const UpdateVehicle = () => {
                     placeholder="Cover Image URL"
                     className="border p-3 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
                 />
-
                 <button
                     type="submit"
-                    className="bg-green-600 hover:bg-green-700 transition-colors text-white py-3 rounded font-semibold mt-2"
+                    className="w-full bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white font-semibold py-3 rounded-lg shadow-md hover:from-green-600 hover:via-emerald-600 hover:to-teal-600 transition-all duration-300"
                 >
                     Update Vehicle
                 </button>
+
             </form>
         </motion.div>
     );

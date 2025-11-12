@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const VehicleCard = ({ vehicle }) => {
     return (
         <motion.div
-            className="border rounded-lg shadow-md overflow-hidden bg-white hover:shadow-xl transition-shadow duration-300"
+            className="rounded-lg shadow-md overflow-hidden bg-sky-50 hover:shadow-xl transition-shadow duration-300"
             whileHover={{ scale: 1.03 }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

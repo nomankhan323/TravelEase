@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 const images = [
     "https://i.postimg.cc/kGpfrPSZ/pexels-vladimir-konoplev-155326297-10889644.jpg",
     "https://i.postimg.cc/NGSVFZLz/pexels-christianbuergi-13014390.jpg",
-    "https://i.postimg.cc/1zm7bQYS/pexels-jarod-16558172.jpg",
+    "https://i.postimg.cc/8cyt8KsJ/pexels-rao-qingwei-400570939-16569268.jpg",
 ];
 
 const PromoSection = () => {

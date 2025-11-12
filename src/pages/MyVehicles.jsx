@@ -8,11 +8,14 @@ const MyVehicles = () => {
     const { user } = useAuth();
     const [vehicles, setVehicles] = useState([]);
 
-    const fetchData = () => {
-        fetch(`http://localhost:5000/my-vehicles/${user.email}`)
-            .then(res => res.json())
-            .then(data => setVehicles(data))
-            .catch(err => console.error(err));
+    const fetchData = async () => {
+        try {
+            const res = await fetch(`http://localhost:5000/my-vehicles/${user.email}`);
+            const data = await res.json();
+            setVehicles(data);
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     useEffect(() => {
@@ -22,16 +25,20 @@ const MyVehicles = () => {
     }, [user?.email]);
 
     const handleDelete = async (id) => {
-        const res = await fetch(`http://localhost:5000/delete-vehicle/${id}`, {
-            method: "DELETE",
-        });
-        const data = await res.json();
+        try {
+            const res = await fetch(`http://localhost:5000/delete-vehicle/${id}`, {
+                method: "DELETE",
+            });
+            const data = await res.json();
 
-        if (data.success) {
-            toast.success("Vehicle deleted");
-            fetchData();
-        } else {
-            toast.error("Failed to delete");
+            if (data.success) {
+                toast.success("Vehicle deleted");
+                fetchData();
+            } else {
+                toast.error("Failed to delete");
+            }
+        } catch (err) {
+            toast.error("Something went wrong!");
         }
     };
 
@@ -56,7 +63,7 @@ const MyVehicles = () => {
                     {vehicles.map((v) => (
                         <motion.div
                             key={v._id}
-                            className="border rounded-lg shadow-md overflow-hidden bg-white hover:shadow-xl transition-shadow cursor-pointer"
+                            className="border rounded-lg shadow-md overflow-hidden bg-sky-50 hover:shadow-xl transition-shadow cursor-pointer"
                             whileHover={{ scale: 1.03 }}
                             variants={{
                                 hidden: { opacity: 0, y: 20 },
@@ -64,7 +71,7 @@ const MyVehicles = () => {
                             }}
                         >
                             <img
-                                src={v.coverImage}
+                                src={v.coverImage || "https://via.placeholder.com/300x200?text=No+Image"}
                                 alt={v.vehicleName}
                                 className="w-full h-40 object-cover rounded-t-lg"
                             />

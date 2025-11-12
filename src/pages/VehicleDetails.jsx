@@ -53,7 +53,7 @@ const VehicleDetails = () => {
 
     return (
         <motion.div
-            className="max-w-3xl mx-auto p-6 bg-white rounded shadow mt-6"
+            className="max-w-3xl mx-auto p-6 bg-sky-50 rounded shadow mt-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}

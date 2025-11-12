@@ -59,9 +59,9 @@ const Navbar = () => {
                     <motion.div whileHover={{ scale: 1.05 }}>
                         <Link
                             to="/"
-                            className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg hover:text-sky-300 transition"
+                            className="text-2xl md:text-3xl font-bold text-yellow-500 drop-shadow-lg hover:text-sky-200 transition"
                         >
-                            TravelEase
+                            Travel<span className="text-orange-500 hover:text-sky-300">Ease</span>
                         </Link>
                     </motion.div>
 

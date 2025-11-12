@@ -38,7 +38,7 @@ const MyBookings = () => {
                     {bookings.map((b) => (
                         <motion.div
                             key={b._id}
-                            className="border rounded-lg shadow-md overflow-hidden bg-white hover:shadow-xl transition-shadow cursor-pointer"
+                            className="rounded-lg shadow-md overflow-hidden bg-sky-50 hover:shadow-xl transition-shadow cursor-pointer"
                             whileHover={{ scale: 1.03 }}
                             variants={{
                                 hidden: { opacity: 0, y: 20 },

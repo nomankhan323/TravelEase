@@ -65,7 +65,7 @@ const AddVehicle = () => {
 
     return (
         <motion.div
-            className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6"
+            className="max-w-3xl mx-auto p-6 bg-sky-50 rounded-lg shadow-lg mt-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -79,7 +79,7 @@ const AddVehicle = () => {
                     type="text"
                     name="vehicleName"
                     placeholder="Vehicle Name"
-                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder-black"
                     onChange={handleChange}
                     required
                 />
@@ -88,14 +88,14 @@ const AddVehicle = () => {
                     type="text"
                     name="owner"
                     placeholder="Owner Name"
-                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder-black"
                     onChange={handleChange}
                     required
                 />
 
                 <select
                     name="category"
-                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder-black"
                     onChange={handleChange}
                     required
                 >
@@ -110,7 +110,7 @@ const AddVehicle = () => {
                     type="number"
                     name="pricePerDay"
                     placeholder="Price Per Day"
-                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder-black"
                     onChange={handleChange}
                     required
                 />
@@ -119,14 +119,14 @@ const AddVehicle = () => {
                     type="text"
                     name="location"
                     placeholder="Location"
-                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder-black"
                     onChange={handleChange}
                     required
                 />
 
                 <select
                     name="availability"
-                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder-black"
                     onChange={handleChange}
                 >
                     <option value="Available">Available</option>
@@ -136,7 +136,7 @@ const AddVehicle = () => {
                 <textarea
                     name="description"
                     placeholder="Description"
-                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder-black"
                     rows="4"
                     onChange={handleChange}
                     required
@@ -146,7 +146,7 @@ const AddVehicle = () => {
                     type="text"
                     name="coverImage"
                     placeholder="Vehicle Image URL"
-                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    className="border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder-black"
                     onChange={handleChange}
                     required
                 />
@@ -154,14 +154,15 @@ const AddVehicle = () => {
                 <motion.button
                     type="submit"
                     className="bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600
-               text-white py-3 px-6 rounded font-semibold 
-               shadow-md hover:from-sky-600 hover:via-indigo-600 hover:to-purple-700 
-               transition-all duration-300"
+        text-white py-3 px-6 rounded font-semibold 
+        shadow-md hover:from-sky-600 hover:via-indigo-600 hover:to-purple-700 
+        transition-all duration-300"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                 >
                     Add Vehicle
                 </motion.button>
+
 
             </form>
         </motion.div>

@@ -1,10 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
 
 const Navbar = () => {
     const { user, logout } = useAuth();
+    const { dark, toggleTheme } = useTheme();
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -42,12 +45,11 @@ const Navbar = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled
-                    ? "backdrop-blur-md bg-blue-900/70 shadow-md"
+                    ? "backdrop-blur-md bg-white/70 dark:bg-gray-900/70 shadow-md"
                     : "bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500"
-                    } text-white`}
+                    } text-white dark:text-white`}
             >
                 <div className="flex justify-between items-center h-14 px-4 md:px-12 lg:px-20">
-
                     <motion.div whileHover={{ scale: 1.05 }}>
                         <Link
                             to="/"
@@ -74,6 +76,18 @@ const Navbar = () => {
                     </div>
 
                     <div className="hidden md:flex gap-4 items-center">
+                        <button
+                            onClick={toggleTheme}
+                            className="p-2 rounded-full bg-white/20 dark:bg-gray-700 transition"
+                            title="Toggle Theme"
+                        >
+                            {dark ? (
+                                <SunIcon className="w-5 h-5 text-yellow-400" />
+                            ) : (
+                                <MoonIcon className="w-5 h-5 text-gray-900" />
+                            )}
+                        </button>
+
                         {user ? (
                             <>
                                 <div className="relative group">
@@ -139,7 +153,7 @@ const Navbar = () => {
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3, ease: "easeInOut" }}
-                            className="md:hidden bg-blue-700 overflow-hidden"
+                            className="md:hidden bg-white dark:bg-gray-900 overflow-hidden"
                         >
                             <div className="flex flex-col items-center gap-2 py-2">
                                 {navItems.map(({ to, label }) => (
@@ -148,7 +162,7 @@ const Navbar = () => {
                                         to={to}
                                         onClick={() => setMenuOpen(false)}
                                         className={({ isActive }) =>
-                                            `px-4 py-2 w-full text-center text-white font-medium transition ${isActive ? "text-sky-400" : "hover:text-sky-300"
+                                            `px-4 py-2 w-full text-center font-medium transition ${isActive ? "text-sky-400" : "hover:text-sky-300"
                                             }`
                                         }
                                     >

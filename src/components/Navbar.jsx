@@ -42,12 +42,12 @@ const Navbar = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled
-                        ? "backdrop-blur-md bg-blue-900/70 shadow-md"
-                        : "bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500"
+                    ? "backdrop-blur-md bg-blue-900/70 shadow-md"
+                    : "bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500"
                     } text-white`}
             >
                 <div className="flex justify-between items-center h-14 px-4 md:px-12 lg:px-20">
-                    {/* Logo */}
+
                     <motion.div whileHover={{ scale: 1.05 }}>
                         <Link
                             to="/"
@@ -58,7 +58,6 @@ const Navbar = () => {
                         </Link>
                     </motion.div>
 
-                    {/* Desktop Nav - Centered with extra spacing */}
                     <div className="hidden md:flex gap-10 flex-1 justify-center">
                         {navItems.map(({ to, label }) => (
                             <NavLink
@@ -74,7 +73,6 @@ const Navbar = () => {
                         ))}
                     </div>
 
-                    {/* User/Login Buttons - Right with extra spacing */}
                     <div className="hidden md:flex gap-4 items-center">
                         {user ? (
                             <>
@@ -115,7 +113,6 @@ const Navbar = () => {
                         )}
                     </div>
 
-                    {/* Mobile Hamburger */}
                     <button
                         className="md:hidden focus:outline-none"
                         onClick={() => setMenuOpen(!menuOpen)}
@@ -135,7 +132,6 @@ const Navbar = () => {
                     </button>
                 </div>
 
-                {/* Mobile Menu */}
                 <AnimatePresence>
                     {menuOpen && (
                         <motion.div
@@ -160,7 +156,6 @@ const Navbar = () => {
                                     </NavLink>
                                 ))}
 
-                                {/* Mobile User/Login Buttons */}
                                 {user ? (
                                     <motion.button
                                         whileHover={{ scale: 1.05 }}

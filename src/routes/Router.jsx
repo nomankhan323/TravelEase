@@ -1,4 +1,3 @@
-
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home";
@@ -10,6 +9,7 @@ import UpdateVehicle from "../pages/UpdateVehicle";
 import VehicleDetails from "../pages/VehicleDetails";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import NotFound from "../pages/NotFound";
 import PrivateRoute from "../components/PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -54,6 +54,8 @@ export const router = createBrowserRouter([
             { path: "vehicle/:id", element: <VehicleDetails /> },
             { path: "login", element: <Login /> },
             { path: "register", element: <Register /> },
+
+            { path: "*", element: <NotFound /> },
         ],
     },
 ]);

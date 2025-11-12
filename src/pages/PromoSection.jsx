@@ -24,17 +24,14 @@ const PromoSection = () => {
     return (
         <section className="relative mt-16 px-4 sm:px-6 lg:px-12 overflow-hidden">
 
-            {/* Full vibrant animated gradient background */}
             <motion.div
                 className="absolute inset-0 -z-10 bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500"
                 animate={{ backgroundPosition: ["0% 50%", "100% 50%"] }}
                 transition={{ duration: 20, repeat: Infinity, repeatType: "reverse" }}
             />
 
-            {/* Hero section */}
             <div className="max-w-6xl mx-auto rounded-3xl shadow-xl p-8 md:p-12 grid md:grid-cols-2 gap-10 items-center">
 
-                {/* Promo Text */}
                 <motion.div
                     initial="hidden"
                     animate="visible"
@@ -47,7 +44,6 @@ const PromoSection = () => {
                         Travel Smarter with <span className="text-yellow-300">TravelEase</span> 🚘
                     </motion.h2>
 
-                    {/* About / Description Text */}
                     <motion.p
                         variants={{ hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1 } }}
                         className="text-white/90 mb-4 leading-relaxed text-lg"
@@ -72,7 +68,6 @@ const PromoSection = () => {
                     </motion.div>
                 </motion.div>
 
-                {/* Hero Slider with fade + scale */}
                 <div className="relative flex justify-center items-center">
                     <div className="relative w-72 h-72 md:w-96 md:h-96 overflow-hidden rounded-2xl border-4 border-white/30 shadow-2xl">
                         <AnimatePresence mode="wait">
@@ -91,7 +86,6 @@ const PromoSection = () => {
                 </div>
             </div>
 
-            {/* Top Cars Section */}
             <section className="max-w-6xl mx-auto mt-12">
                 <h3 className="text-2xl md:text-3xl font-bold mb-6 text-center text-white">
                     Top Cars 🚗

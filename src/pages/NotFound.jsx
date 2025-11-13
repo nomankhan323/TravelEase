@@ -21,7 +21,7 @@ const NotFound = () => {
                 Oops! Page not found.
             </motion.p>
             <motion.img
-                src="https://i.postimg.cc/7YZ9QZfq/404-illustration.png"
+                src="https://i.postimg.cc/bNfPYVQh/404-error-page-templates.jpg"
                 alt="404 illustration"
                 className="w-64 md:w-96 mb-6"
                 initial={{ opacity: 0 }}

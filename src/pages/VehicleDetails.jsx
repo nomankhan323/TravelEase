@@ -10,7 +10,7 @@ const VehicleDetails = () => {
     const [vehicle, setVehicle] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/vehicle/${id}`)
+        fetch(`https://as-10-backend.vercel.app/vehicle/${id}`)
             .then((res) => res.json())
             .then((data) => setVehicle(data))
             .catch((err) => console.error(err));
@@ -30,7 +30,7 @@ const VehicleDetails = () => {
         };
 
         try {
-            const res = await fetch("http://localhost:5000/book", {
+            const res = await fetch("https://as-10-backend.vercel.app/book", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(booking),

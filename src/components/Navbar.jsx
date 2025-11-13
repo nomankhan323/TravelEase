@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
 
 const Navbar = () => {
-    const { user, logout } = useAuth();
+    const { user, loading, logout } = useAuth();
     const { dark, toggleTheme } = useTheme();
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -38,6 +38,14 @@ const Navbar = () => {
             : []),
     ];
 
+    if (loading) {
+        return (
+            <nav className="fixed w-full top-0 z-50 bg-gray-100 dark:bg-gray-900 p-4 text-center">
+                Loading...
+            </nav>
+        );
+    }
+
     return (
         <>
             <motion.nav
@@ -47,9 +55,10 @@ const Navbar = () => {
                 className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled
                     ? "backdrop-blur-md bg-white/70 dark:bg-gray-900/70 shadow-md"
                     : "bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-500"
-                    } text-white dark:text-white`}
+                    } text-white`}
             >
                 <div className="flex justify-between items-center h-14 px-4 md:px-12 lg:px-20">
+                    {/* Logo */}
                     <motion.div whileHover={{ scale: 1.05 }}>
                         <Link
                             to="/"
@@ -60,7 +69,8 @@ const Navbar = () => {
                         </Link>
                     </motion.div>
 
-                    <div className="hidden md:flex gap-10 flex-1 justify-center">
+                    {/* Desktop Nav */}
+                    <div className="hidden md:flex gap-10 flex-1 justify-center items-center">
                         {navItems.map(({ to, label }) => (
                             <NavLink
                                 key={to}
@@ -75,7 +85,9 @@ const Navbar = () => {
                         ))}
                     </div>
 
+                    {/* Desktop Right Controls */}
                     <div className="hidden md:flex gap-4 items-center">
+                        {/* Theme Toggle */}
                         <button
                             onClick={toggleTheme}
                             className="p-2 rounded-full bg-white/20 dark:bg-gray-700 transition"
@@ -93,8 +105,11 @@ const Navbar = () => {
                                 <div className="relative group">
                                     <img
                                         src={user.photoURL || "/defaultUser.png"}
-                                        alt="User"
-                                        className="w-8 h-8 rounded-full border-2 border-white cursor-pointer"
+                                        alt={user.displayName || "User"}
+                                        className="w-8 h-8 rounded-full border-2 border-white object-cover"
+                                        onError={(e) =>
+                                            (e.currentTarget.src = "/defaultUser.png")
+                                        }
                                     />
                                     <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-xs bg-white text-gray-800 px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
                                         {user.displayName || "User"}
@@ -127,25 +142,42 @@ const Navbar = () => {
                         )}
                     </div>
 
-                    <button
-                        className="md:hidden focus:outline-none"
-                        onClick={() => setMenuOpen(!menuOpen)}
-                    >
-                        <span
-                            className={`block w-6 h-0.5 bg-white mb-1 transition-transform duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""
-                                }`}
-                        ></span>
-                        <span
-                            className={`block w-6 h-0.5 bg-white mb-1 transition-opacity duration-300 ${menuOpen ? "opacity-0" : "opacity-100"
-                                }`}
-                        ></span>
-                        <span
-                            className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""
-                                }`}
-                        ></span>
-                    </button>
+                    {/* Mobile Menu Button */}
+                    <div className="flex md:hidden items-center gap-2">
+                        {/* Theme Toggle always visible */}
+                        <button
+                            onClick={toggleTheme}
+                            className="p-2 rounded-full bg-white/20 dark:bg-gray-700 transition"
+                            title="Toggle Theme"
+                        >
+                            {dark ? (
+                                <SunIcon className="w-5 h-5 text-yellow-400" />
+                            ) : (
+                                <MoonIcon className="w-5 h-5 text-gray-900" />
+                            )}
+                        </button>
+
+                        <button
+                            className="focus:outline-none"
+                            onClick={() => setMenuOpen(!menuOpen)}
+                        >
+                            <span
+                                className={`block w-6 h-0.5 bg-white mb-1 transition-transform duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""
+                                    }`}
+                            ></span>
+                            <span
+                                className={`block w-6 h-0.5 bg-white mb-1 transition-opacity duration-300 ${menuOpen ? "opacity-0" : "opacity-100"
+                                    }`}
+                            ></span>
+                            <span
+                                className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""
+                                    }`}
+                            ></span>
+                        </button>
+                    </div>
                 </div>
 
+                {/* Mobile Menu */}
                 <AnimatePresence>
                     {menuOpen && (
                         <motion.div

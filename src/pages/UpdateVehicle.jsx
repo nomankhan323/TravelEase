@@ -8,7 +8,7 @@ const UpdateVehicle = () => {
     const [vehicle, setVehicle] = useState(null);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/vehicle/${id}`)
+        fetch(`https://as-10-backend.vercel.app/vehicle/${id}`)
             .then((res) => res.json())
             .then((data) => setVehicle(data))
             .catch((err) => console.error(err));
@@ -20,7 +20,7 @@ const UpdateVehicle = () => {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        const res = await fetch(`http://localhost:5000/update-vehicle/${id}`, {
+        const res = await fetch(`https://as-10-backend.vercel.app/update-vehicle/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(vehicle),

@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+/* ei part add koro */
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* smooth theme transition jonne */
+body {
+    @apply transition-colors duration-300;
+}
